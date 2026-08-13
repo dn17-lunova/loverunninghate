@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Running Hate — gear for every kind of run</title>
+<meta name="description" content="Love Running Hate makes gear for the days you fly, the days you drag and the days you go anyway.">
+<link rel="icon" type="image/svg+xml" href="assets/logo-fox-red.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: '#DF0000',
+        page: '#F4F4F4',
+        inactive: '#D8D8D8',
+      },
+      fontFamily: {
+        sans: ['"Instrument Sans"', 'system-ui', 'sans-serif'],
+      },
+    }
+  }
+}
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: "Instrument Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .tracking-display { letter-spacing: -0.03em; }
+
+  /* ---- Fox hover message card ---- */
+  .fox-card {
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  .fox-wrap:hover .fox-card,
+  .fox-wrap.is-open .fox-card {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .fox-logo .fox-red { display: none; }
+  .fox-wrap:hover .fox-logo .fox-black,
+  .fox-wrap.is-open .fox-logo .fox-black { display: none; }
+  .fox-wrap:hover .fox-logo .fox-red,
+  .fox-wrap.is-open .fox-logo .fox-red { display: block; }
+
+  /* ---- Accordion ---- */
+  .acc-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .45s cubic-bezier(.4,0,.2,1);
+  }
+  .acc-item.open .acc-body { grid-template-rows: 1fr; }
+  .acc-body > div { overflow: hidden; }
+  .acc-item.open .acc-title { color: #DF0000; }
+  .acc-toggle .icon-minus { display: none; }
+  .acc-item.open .acc-toggle .icon-plus { display: none; }
+  .acc-item.open .acc-toggle .icon-minus { display: block; }
+
+  /* buttons */
+  .btn-primary { background: #DF0000; color: #fff; transition: background .2s ease, color .2s ease; }
+  .btn-primary:hover:not(:disabled) { background: #000; color: #fff; }
+  .btn-primary:disabled { background: #fff; color: #000; border: 1px solid #D8D8D8; cursor: not-allowed; }
+  .btn-hero { background: #DF0000; color: #fff; transition: background .2s ease, color .2s ease; }
+  .btn-hero:hover { background: #fff; color: #DF0000; }
+
+  .footer-link { color: #000; text-decoration: none; transition: color .2s ease; }
+  .footer-link:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+
+  input.email-field::placeholder { color: #A3A3A3; }
+</style>
+</head>
+<body class="bg-page text-black">
+
+<!-- ===================== HEADER ===================== -->
+<header class="sticky top-3 sm:top-5 z-50 mx-auto w-[calc(100%-2rem)] max-w-[1200px]">
+  <div class="bg-white rounded-full px-6 sm:px-12 h-[60px] sm:h-[76px] flex items-center justify-between shadow-[0_2px_20px_rgba(0,0,0,0.04)]">
+    <!-- Logo + hover card -->
+    <div class="fox-wrap relative" id="foxWrap">
+      <a href="#top" class="fox-logo block" aria-label="Love Running Hate — home">
+        <img src="assets/logo-fox.svg" alt="Love Running Hate fox logo" class="fox-black h-7 sm:h-9 w-auto">
+        <img src="assets/logo-fox-red.svg" alt="" class="fox-red h-7 sm:h-9 w-auto">
+      </a>
+      <!-- message card -->
+      <div class="fox-card absolute left-6 sm:left-20 top-[calc(100%+10px)] w-[265px] bg-white rounded-2xl rounded-tl-md shadow-[0_12px_40px_rgba(0,0,0,0.12)] p-4 z-50">
+        <div class="flex items-center gap-2">
+          <span id="foxAvatar" class="w-7 h-7 rounded-full flex items-center justify-center overflow-hidden bg-black shrink-0">
+            <img id="foxAvatarImg" src="assets/logo-fox-red.svg" alt="" class="w-5 h-auto">
+          </span>
+          <span id="foxHandle" class="text-[14px]">@FoxHatesRunning</span>
+        </div>
+        <p id="foxText" class="mt-2 text-[14px] leading-snug">The alarm went off before sunrise. My body stayed in bed emotionally, even after I left the house 😓</p>
+        <div class="mt-3 flex items-center gap-3 text-[12px] text-neutral-400">
+          <span>9:20</span>
+          <span>7/10/26</span>
+          <span class="text-brand">· online</span>
+        </div>
+      </div>
+    </div>
+    <!-- Nav -->
+    <nav class="flex items-center gap-6 sm:gap-14 text-[15px] sm:text-[17px]">
+      <a href="#about" class="hover:text-brand transition-colors">about</a>
+      <a href="#products" class="hover:text-brand transition-colors">products</a>
+      <a href="#subscribe" class="hover:text-brand transition-colors">subscribe</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section id="top" class="mx-auto max-w-[1200px] px-4 pt-24 sm:pt-40 pb-24 sm:pb-40 text-center">
+  <h1 class="tracking-display font-bold leading-[0.95] text-[44px] sm:text-[72px] lg:text-[90px]">
+    Do you love running<br class="hidden sm:block">
+    <span class="sm:hidden"> </span>or do you hate it?<br>
+    <span class="text-brand">Usually both</span>
+  </h1>
+  <p class="mx-auto mt-8 sm:mt-12 max-w-[620px] text-[17px] sm:text-[20px] leading-relaxed">
+    Love Running Hate makes gear for the days you fly, the days you<br class="hidden sm:block">
+    drag and the days you go anyway
+  </p>
+  <a href="#products" class="btn-hero inline-block mt-10 sm:mt-14 rounded-full px-12 h-[56px] sm:h-[60px] leading-[56px] sm:leading-[60px] text-[18px] font-medium">
+    Choose your state
+  </a>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about" class="mx-auto max-w-[1200px] px-4 scroll-mt-28">
+  <div class="bg-white rounded-3xl px-7 sm:px-7 py-9">
+    <h2 class="tracking-display font-semibold text-[24px] sm:text-[32px] leading-tight max-w-[1150px]">
+      We all started <a href="#products" class="text-brand">for the usual reasons</a> — get fitter, lose a few kilos, train for a race we signed up for after two beers
+    </h2>
+    <p class="mt-6 text-[15px] sm:text-[16px] leading-normal max-w-[1150px]">
+      That part lasted a month, maybe two. What kept us going afterwards was something else entirely, and honestly, we're still not sure we can name it. Running just became part of who we are. Even on the weeks we hate it
+    </p>
+  </div>
+
+  <div class="mt-4 grid grid-cols-1 lg:grid-cols-[1fr_490px] gap-4">
+    <div class="bg-brand rounded-3xl px-7 py-10 text-white order-1">
+      <h2 class="tracking-display font-semibold text-[30px] sm:text-[40px] leading-[1.1]">
+        We got tired of ads where every run is easy, every sky is clear and everyone finishes. Whoever those people are, they don't run with us
+      </h2>
+      <p class="mt-8 text-[15px] sm:text-[16px] leading-normal max-w-[620px]">
+        Love Running Hate is made for the whole thing. The mornings when everything clicks and you feel like you could go forever. And the ones where nothing clicks at all – you just get it done and go home.
+      </p>
+      <p class="mt-5 text-[15px] sm:text-[16px] leading-normal max-w-[620px]">
+        If you know both, you know why the name isn't Love Running. It's the full sentence
+      </p>
+    </div>
+    <div class="order-2 rounded-3xl overflow-hidden min-h-[280px]">
+      <img src="assets/runner.jpg" alt="Runner climbing a concrete ramp beside a red railing" class="w-full h-full object-cover">
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRODUCTS ===================== -->
+<section id="products" class="mx-auto max-w-[1200px] px-4 mt-28 sm:mt-44 scroll-mt-28">
+  <div class="flex items-center gap-3 text-[22px] sm:text-[28px]">
+    <span>Choose your state</span>
+    <img src="assets/icon-arrow.svg" alt="" class="w-4 h-4 mt-1">
+  </div>
+
+  <div class="mt-6 space-y-4">
+    <!-- ==== CARD template x3 ==== -->
+    <!-- LOVE -->
+    <div class="acc-item bg-white rounded-3xl" data-product="Love">
+      <button type="button" class="acc-head w-full flex items-center justify-between px-7 sm:px-9 py-8 sm:py-10 text-left" aria-expanded="false">
+        <span class="acc-title tracking-display font-bold text-[40px] sm:text-[64px] leading-none transition-colors hover:text-brand">Love</span>
+        <span class="acc-toggle w-12 h-12 rounded-full bg-page flex items-center justify-center shrink-0">
+          <svg class="icon-plus" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1v16M1 9h16" stroke="black" stroke-width="2"/></svg>
+          <svg class="icon-minus" width="18" height="18" viewBox="0 0 18 18"><path d="M1 9h16" stroke="black" stroke-width="2"/></svg>
+        </span>
+      </button>
+      <div class="acc-body">
+        <div>
+          <div class="px-7 sm:px-9 pb-9 grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-8">
+            <div>
+              <p class="text-[16px] leading-normal">Love Cap “Love Running Hate”<br>100% cotton. One size. Designed in the UK</p>
+              <p class="mt-8 text-[16px]">£50</p>
+              <form class="notify-form mt-4 max-w-[350px]">
+                <input type="email" required placeholder="Enter your email" class="email-field w-full h-[60px] rounded-full border border-inactive bg-transparent px-6 text-[16px] outline-none focus:border-neutral-500 transition-colors">
+                <button type="submit" class="btn-primary mt-3 w-full h-[60px] rounded-full text-[17px] font-medium">Notified me</button>
+              </form>
+            </div>
+            <div class="grid grid-cols-[1fr] sm:grid-cols-[1fr_170px] gap-3">
+              <div class="bg-inactive rounded-xl aspect-[4/3] sm:aspect-auto sm:min-h-[510px]"></div>
+              <div class="grid grid-rows-3 grid-cols-3 sm:grid-cols-1 gap-3">
+                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
+                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
+                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RUNNING -->
+    <div class="acc-item bg-white rounded-3xl" data-product="Running">
+      <button type="button" class="acc-head w-full flex items-center justify-between px-7 sm:px-9 py-8 sm:py-10 text-left" aria-expanded="false">
+        <span class="acc-title tracking-display font-bold text-[40px] sm:text-[64px] leading-none transition-colors hover:text-brand">Running</span>
+        <span class="acc-toggle w-12 h-12 rounded-full bg-page flex items-center justify-center shrink-0">
+          <svg class="icon-plus" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1v16M1 9h16" stroke="black" stroke-width="2"/></svg>
+          <svg class="icon-minus" width="18" height="18" viewBox="0 0 18 18"><path d="M1 9h16" stroke="black" stroke-width="2"/></svg>
+        </span>
+      </button>
+      <div class="acc-body">
+        <div>
+          <div class="px-7 sm:px-9 pb-9 grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-8">
+            <div>
+              <p class="text-[16px] leading-normal">Running Cap “Love Running Hate”<br>100% cotton. One size. Designed in the UK</p>
+              <p class="mt-8 text-[16px]">£50</p>
+              <form class="notify-form mt-4 max-w-[350px]">
+                <input type="email" required placeholder="Enter your email" class="email-field w-full h-[60px] rounded-full border border-inactive bg-transparent px-6 text-[16px] outline-none focus:border-neutral-500 transition-colors">
+                <button type="submit" class="btn-primary mt-3 w-full h-[60px] rounded-full text-[17px] font-medium">Notified me</button>
+              </form>
+            </div>
+            <div class="grid grid-cols-[1fr] sm:grid-cols-[1fr_170px] gap-3">
+              <div class="bg-inactive rounded-xl aspect-[4/3] sm:aspect-auto sm:min-h-[510px]"></div>
+              <div class="grid grid-rows-3 grid-cols-3 sm:grid-cols-1 gap-3">
+                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
+                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
+                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HATE -->
+    <div class="acc-item bg-white rounded-3xl" data-product="Hate">
+      <button type="button" class="acc-head w-full flex items-center justify-between px-7 sm:px-9 py-8 sm:py-10 text-left" aria-expanded="false">
+        <span class="acc-title tracking-display font-bold text-[40px] sm:text-[64px] leading-none transition-colors hover:text-brand">Hate</span>
+        <span class="acc-toggle w-12 h-12 rounded-full bg-page flex items-center justify-center shrink-0">
+          <svg class="icon-plus" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1v16M1 9h16" stroke="black" stroke-width="2"/></svg>
+          <svg class="icon-minus" width="18" height="18" viewBox="0 0 18 18"><path d="M1 9h16" stroke="black" stroke-width="2"/></svg>
+        </span>
+      </button>
+      <div class="acc-body">
+        <div>
+          <div class="px-7 sm:px-9 pb-9 grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-8">
+            <div>
+              <p class="text-[16px] leading-normal">Hate Cap “Love Running Hate”<br>100% cotton. One size. Designed in the UK</p>
+              <p class="mt-8 text-[16px]">£50</p>
+              <form class="notify-form mt-4 max-w-[350px]">
+                <input type="email" required placeholder="Enter your email" class="email-field w-full h-[60px] rounded-full border border-inactive bg-transparent px-6 text-[16px] outline-none focus:border-neutral-500 transition-colors">
+                <button type="submit" class="btn-primary mt-3 w-full h-[60px] rounded-full text-[17px] font-medium">Notified me</button>
+              </form>
+            </div>
+            <div class="grid grid-cols-[1fr] sm:grid-cols-[1fr_170px] gap-3">
+              <div class="bg-inactive rounded-xl aspect-[4/3] sm:aspect-auto sm:min-h-[510px]"></div>
+              <div class="grid grid-rows-3 grid-cols-3 sm:grid-cols-1 gap-3">
+                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
+                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
+                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SUBSCRIBE ===================== -->
+<section id="subscribe" class="mx-auto max-w-[1200px] px-4 mt-32 sm:mt-52 pb-32 sm:pb-48 text-center scroll-mt-28">
+  <h2 class="tracking-display font-bold text-[40px] sm:text-[72px] leading-none">Be first to know</h2>
+  <p class="mt-6 text-[16px] sm:text-[18px]">First drop, restocks and nothing unnecessary</p>
+  <form id="subscribeForm" class="mx-auto mt-10 max-w-[624px]">
+    <div class="hidden sm:flex items-stretch rounded-full border border-inactive overflow-hidden bg-transparent">
+      <input type="email" required placeholder="Enter your email" class="email-field flex-1 bg-transparent px-7 text-[16px] outline-none" id="subEmailDesktop">
+      <button type="submit" class="btn-primary rounded-full px-10 h-[56px] text-[17px] font-medium shrink-0">Join the list</button>
+    </div>
+    <div class="sm:hidden">
+      <input type="email" placeholder="Enter your email" class="email-field w-full h-[56px] rounded-full border border-inactive bg-transparent px-6 text-[16px] outline-none" id="subEmailMobile">
+      <button type="submit" class="btn-primary mt-3 w-full h-[56px] rounded-full text-[17px] font-medium">Join the list</button>
+    </div>
+  </form>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="bg-brand">
+  <div class="pt-12 sm:pt-14 pb-6">
+    <nav class="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 uppercase text-[14px] sm:text-[16px] tracking-wide px-4">
+      <a href="#" class="footer-link">Instagram</a>
+      <a href="#" class="footer-link">Strava</a>
+      <a href="#" class="footer-link">Facebook</a>
+      <a href="#" class="footer-link">hello@lrh.com</a>
+    </nav>
+    <img src="assets/wordmark.png" alt="LOVE RUNNING HATE" class="w-full h-auto mt-10 sm:mt-16 block select-none pointer-events-none">
+  </div>
+</footer>
+
+<script>
+/* ---------- Fox hover: random message ---------- */
+const foxMessages = [
+  {
+    handle: '@FoxHatesRunning',
+    text: 'The alarm went off before sunrise. My body stayed in bed emotionally, even after I left the house 😓',
+    avatarBg: '#000000',
+    avatarFox: 'assets/logo-fox-red.svg'
+  },
+  {
+    handle: '@FoxRunsAnyway',
+    text: 'I stood by the door for ten minutes making excuses. Then I opened it and went outside anyway. 😅',
+    avatarBg: '#FFFFFF',
+    avatarFox: 'assets/logo-fox-red.svg'
+  },
+  {
+    handle: '@FoxLovesRunning',
+    text: 'The streets were empty, the sky was turning pink, and for once I felt faster than the morning. ❤️',
+    avatarBg: '#DF0000',
+    avatarFox: 'assets/logo-fox.svg'
+  }
+];
+
+const foxWrap = document.getElementById('foxWrap');
+let lastIdx = -1;
+function pickFoxMessage() {
+  let i;
+  do { i = Math.floor(Math.random() * foxMessages.length); } while (i === lastIdx && foxMessages.length > 1);
+  lastIdx = i;
+  const m = foxMessages[i];
+  document.getElementById('foxHandle').textContent = m.handle;
+  document.getElementById('foxText').textContent = m.text;
+  const av = document.getElementById('foxAvatar');
+  av.style.background = m.avatarBg;
+  av.style.border = m.avatarBg === '#FFFFFF' ? '1px solid #D8D8D8' : 'none';
+  document.getElementById('foxAvatarImg').src = m.avatarFox;
+}
+foxWrap.addEventListener('mouseenter', pickFoxMessage);
+/* mobile: tap toggles the card */
+foxWrap.querySelector('a').addEventListener('click', (e) => {
+  if (window.matchMedia('(hover: none)').matches) {
+    e.preventDefault();
+    if (!foxWrap.classList.contains('is-open')) pickFoxMessage();
+    foxWrap.classList.toggle('is-open');
+  }
+});
+document.addEventListener('click', (e) => {
+  if (!foxWrap.contains(e.target)) foxWrap.classList.remove('is-open');
+});
+
+/* ---------- Accordion (independent items) ---------- */
+document.querySelectorAll('.acc-item').forEach(item => {
+  const head = item.querySelector('.acc-head');
+  head.addEventListener('click', () => {
+    const open = item.classList.toggle('open');
+    head.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+
+/* ---------- Forms: success state ---------- */
+function bindForm(form) {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = form.querySelector('input[type="email"], input');
+    const visibleInputs = [...form.querySelectorAll('input')].filter(i => i.offsetParent !== null);
+    const field = visibleInputs[0] || input;
+    if (field && field.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value)) { field.focus(); return; }
+    if (field && !field.value) { field.focus(); return; }
+    form.querySelectorAll('button[type="submit"]').forEach(btn => {
+      btn.textContent = "You're on the list";
+      btn.disabled = true;
+    });
+    if (field) field.disabled = true;
+  });
+}
+document.querySelectorAll('.notify-form').forEach(bindForm);
+bindForm(document.getElementById('subscribeForm'));
+</script>
+</body>
+</html>
