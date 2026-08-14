@@ -347,24 +347,33 @@ document.querySelectorAll('.acc-item').forEach(item => {
   });
 });
 
-/* ---------- Forms: success state ---------- */
-function bindForm(form) {
-  form.addEventListener('submit', (e) => {
+/* ---------- Forms: save subscriber + success state ---------- */
+const SUBSCRIBE_URL = 'https://xhvunpdtaucxmgxvfxou.supabase.co/functions/v1/subscribe';
+function bindForm(form, source) {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const input = form.querySelector('input[type="email"], input');
     const visibleInputs = [...form.querySelectorAll('input')].filter(i => i.offsetParent !== null);
-    const field = visibleInputs[0] || input;
-    if (field && field.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value)) { field.focus(); return; }
-    if (field && !field.value) { field.focus(); return; }
-    form.querySelectorAll('button[type="submit"]').forEach(btn => {
-      btn.textContent = "You're on the list";
-      btn.disabled = true;
-    });
-    if (field) field.disabled = true;
+    const field = visibleInputs[0];
+    if (!field || !field.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value)) { if (field) field.focus(); return; }
+    const buttons = [...form.querySelectorAll('button[type="submit"]')];
+    buttons.forEach(b => { b.disabled = true; });
+    try {
+      const r = await fetch(SUBSCRIBE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: field.value, source })
+      });
+      if (!r.ok) throw new Error('request failed');
+      buttons.forEach(b => { b.textContent = "You're on the list"; });
+      field.disabled = true;
+    } catch (err) {
+      buttons.forEach(b => { b.disabled = false; });
+      field.focus();
+    }
   });
 }
-document.querySelectorAll('.notify-form').forEach(bindForm);
-bindForm(document.getElementById('subscribeForm'));
+document.querySelectorAll('.notify-form').forEach(f => bindForm(f, (f.closest('.acc-item') && f.closest('.acc-item').dataset.product ? f.closest('.acc-item').dataset.product : 'product').toLowerCase()));
+bindForm(document.getElementById('subscribeForm'), 'subscribe');
 </script>
 </body>
 </html>
