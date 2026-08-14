@@ -296,28 +296,20 @@ tailwind.config = {
   </div>
 </footer>
 
+<script src="assets/tweets.js"></script>
 <script>
 /* ---------- Fox hover: random message ---------- */
-const foxMessages = [
-  {
-    handle: '@FoxHatesRunning',
-    text: 'The alarm went off before sunrise. My body stayed in bed emotionally, even after I left the house 😓',
-    avatarBg: '#000000',
-    avatarFox: 'assets/logo-fox-red.svg'
-  },
-  {
-    handle: '@FoxRunsAnyway',
-    text: 'I stood by the door for ten minutes making excuses. Then I opened it and went outside anyway. 😅',
-    avatarBg: '#FFFFFF',
-    avatarFox: 'assets/logo-fox-red.svg'
-  },
-  {
-    handle: '@FoxLovesRunning',
-    text: 'The streets were empty, the sky was turning pink, and for once I felt faster than the morning. ❤️',
-    avatarBg: '#DF0000',
-    avatarFox: 'assets/logo-fox.svg'
-  }
-];
+const FOX_PROFILES = {
+  love:   { handle: '@FoxLovesRunning', avatarBg: '#DF0000', avatarFox: 'assets/logo-fox.svg' },
+  hate:   { handle: '@FoxHatesRunning', avatarBg: '#000000', avatarFox: 'assets/logo-fox-red.svg' },
+  anyway: { handle: '@FoxRunsAnyway',   avatarBg: '#FFFFFF', avatarFox: 'assets/logo-fox-red.svg' }
+};
+const foxMessages = (window.FOX_TWEETS || []).map(t => ({
+  handle: FOX_PROFILES[t.mood].handle,
+  text: t.text,
+  avatarBg: FOX_PROFILES[t.mood].avatarBg,
+  avatarFox: FOX_PROFILES[t.mood].avatarFox
+}));
 
 const foxWrap = document.getElementById('foxWrap');
 let lastIdx = -1;
