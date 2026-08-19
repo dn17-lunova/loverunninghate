@@ -74,6 +74,23 @@ tailwind.config = {
   .footer-link:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
 
   input.email-field::placeholder { color: #A3A3A3; }
+
+  /* ---- Mobile burger menu ---- */
+  .mobile-menu {
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  header.menu-open .mobile-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .burger-line { transition: transform .25s ease, opacity .2s ease; }
+  header.menu-open .burger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  header.menu-open .burger-line:nth-child(2) { opacity: 0; }
+  header.menu-open .burger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 </style>
 </head>
 <body class="bg-page text-black">
@@ -103,12 +120,30 @@ tailwind.config = {
         </div>
       </div>
     </div>
-    <!-- Nav -->
-    <nav class="flex items-center gap-6 sm:gap-14 text-[15px] sm:text-[17px]">
+    <!-- Nav (desktop) -->
+    <nav class="hidden sm:flex items-center gap-14 text-[17px]">
       <a href="#about" class="hover:text-brand transition-colors">about</a>
       <a href="#products" class="hover:text-brand transition-colors">products</a>
       <a href="#subscribe" class="hover:text-brand transition-colors">subscribe</a>
     </nav>
+    <!-- Burger (mobile) -->
+    <button id="burgerBtn" type="button" class="sm:hidden flex flex-col justify-center items-end gap-[6px] w-8 h-8" aria-label="Menu" aria-expanded="false">
+      <span class="burger-line block w-7 h-[2px] bg-black"></span>
+      <span class="burger-line block w-7 h-[2px] bg-black"></span>
+      <span class="burger-line block w-7 h-[2px] bg-black"></span>
+    </button>
+  </div>
+  <!-- Mobile menu panel -->
+  <div id="mobileMenu" class="mobile-menu sm:hidden absolute left-0 right-0 top-[calc(100%+8px)] bg-white rounded-3xl shadow-[0_16px_48px_rgba(0,0,0,0.14)] px-7 py-8 z-40">
+    <nav class="flex flex-col gap-6">
+      <a href="#about" class="tracking-display font-semibold text-[34px] leading-none">about</a>
+      <a href="#products" class="tracking-display font-semibold text-[34px] leading-none">products</a>
+      <a href="#subscribe" class="tracking-display font-semibold text-[34px] leading-none">subscribe</a>
+    </nav>
+    <div class="mt-8 pt-6 border-t border-inactive">
+      <p class="text-[13px] text-neutral-400">Enquiries</p>
+      <a href="mailto:hello@lrh.com" class="text-[15px]">hello@lrh.com</a>
+    </div>
   </div>
 </header>
 
@@ -336,6 +371,17 @@ foxWrap.querySelector('a').addEventListener('click', (e) => {
 });
 document.addEventListener('click', (e) => {
   if (!foxWrap.contains(e.target)) foxWrap.classList.remove('is-open');
+});
+
+/* ---------- Mobile burger menu ---------- */
+const headerEl = document.querySelector('header');
+const burgerBtn = document.getElementById('burgerBtn');
+burgerBtn.addEventListener('click', () => {
+  const open = headerEl.classList.toggle('menu-open');
+  burgerBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+document.querySelectorAll('#mobileMenu a').forEach(a => {
+  a.addEventListener('click', () => headerEl.classList.remove('menu-open'));
 });
 
 /* ---------- Accordion (independent items) ---------- */
