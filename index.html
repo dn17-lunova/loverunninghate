@@ -91,6 +91,17 @@ tailwind.config = {
   header.menu-open .burger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   header.menu-open .burger-line:nth-child(2) { opacity: 0; }
   header.menu-open .burger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ---- Product photos & lightbox ---- */
+  .pv img { transition: transform .35s ease; }
+  .pv:hover img { transform: scale(1.04); }
+  .lb { display: none; }
+  .lb.open { display: flex; }
+  .lb-arrow {
+    color: #fff; font-size: 56px; line-height: 1; padding: 12px 18px;
+    transition: color .2s ease; user-select: none;
+  }
+  .lb-arrow:hover { color: #DF0000; }
 </style>
 </head>
 <body class="bg-page text-black">
@@ -222,11 +233,20 @@ tailwind.config = {
               </form>
             </div>
             <div class="order-2 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2 grid grid-cols-[1fr] sm:grid-cols-[1fr_170px] gap-3">
-              <div class="bg-inactive rounded-xl aspect-[4/3] sm:aspect-auto sm:min-h-[510px]"></div>
+              <button type="button" class="pv rounded-xl overflow-hidden aspect-[4/3] sm:aspect-auto sm:min-h-[510px]" data-product="love" data-idx="0" aria-label="View photo">
+                <img src="assets/products/love-1-s.jpg" alt="Love cap — front" class="w-full h-full object-cover" loading="lazy">
+              </button>
               <div class="grid grid-cols-3 sm:grid-rows-3 sm:grid-cols-1 gap-3">
-                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
-                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
-                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
+                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="love" data-idx="1" aria-label="View photo">
+                  <img src="assets/products/love-2-s.jpg" alt="Love cap — side" class="w-full h-full object-cover" loading="lazy">
+                </button>
+                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="love" data-idx="2" aria-label="View photo">
+                  <img src="assets/products/love-3-s.jpg" alt="Love cap — back" class="w-full h-full object-cover" loading="lazy">
+                </button>
+                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1 grid grid-cols-2 gap-[3px]" data-product="love" data-idx="3" aria-label="View photos on model">
+                  <img src="assets/products/love-4-s.jpg" alt="Love cap on model — front" class="w-full h-full object-cover" loading="lazy">
+                  <img src="assets/products/love-5-s.jpg" alt="Love cap on model — back" class="w-full h-full object-cover" loading="lazy">
+                </button>
               </div>
             </div>
           </div>
@@ -288,11 +308,20 @@ tailwind.config = {
               </form>
             </div>
             <div class="order-2 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2 grid grid-cols-[1fr] sm:grid-cols-[1fr_170px] gap-3">
-              <div class="bg-inactive rounded-xl aspect-[4/3] sm:aspect-auto sm:min-h-[510px]"></div>
+              <button type="button" class="pv rounded-xl overflow-hidden aspect-[4/3] sm:aspect-auto sm:min-h-[510px]" data-product="hate" data-idx="0" aria-label="View photo">
+                <img src="assets/products/hate-1-s.jpg" alt="Hate cap — front" class="w-full h-full object-cover" loading="lazy">
+              </button>
               <div class="grid grid-cols-3 sm:grid-rows-3 sm:grid-cols-1 gap-3">
-                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
-                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
-                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
+                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="hate" data-idx="1" aria-label="View photo">
+                  <img src="assets/products/hate-2-s.jpg" alt="Hate cap — side" class="w-full h-full object-cover" loading="lazy">
+                </button>
+                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="hate" data-idx="2" aria-label="View photo">
+                  <img src="assets/products/hate-3-s.jpg" alt="Hate cap — back" class="w-full h-full object-cover" loading="lazy">
+                </button>
+                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1 grid grid-cols-2 gap-[3px]" data-product="hate" data-idx="3" aria-label="View photos on model">
+                  <img src="assets/products/hate-4-s.jpg" alt="Hate cap on model — front" class="w-full h-full object-cover" loading="lazy">
+                  <img src="assets/products/hate-5-s.jpg" alt="Hate cap on model — back" class="w-full h-full object-cover" loading="lazy">
+                </button>
               </div>
             </div>
           </div>
@@ -330,6 +359,16 @@ tailwind.config = {
     <img src="assets/wordmark.png" alt="LOVE RUNNING HATE" class="w-full h-auto mt-10 sm:mt-16 block select-none pointer-events-none">
   </div>
 </footer>
+
+<!-- ===================== LIGHTBOX ===================== -->
+<div id="lightbox" class="lb fixed inset-0 z-[100] items-center justify-center" role="dialog" aria-modal="true">
+  <div id="lbBackdrop" class="absolute inset-0 bg-black/90"></div>
+  <button id="lbClose" type="button" class="absolute top-3 right-4 z-20 text-white text-[42px] leading-none hover:text-brand transition-colors" aria-label="Close">&times;</button>
+  <button id="lbPrev" type="button" class="lb-arrow absolute left-1 sm:left-6 z-20" aria-label="Previous">&#8249;</button>
+  <img id="lbImg" class="relative z-10 max-w-[92vw] max-h-[86vh] rounded-lg select-none" src="" alt="Product photo">
+  <button id="lbNext" type="button" class="lb-arrow absolute right-1 sm:right-6 z-20" aria-label="Next">&#8250;</button>
+  <div id="lbCount" class="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 text-white/80 text-[14px] tracking-widest"></div>
+</div>
 
 <script src="assets/tweets.js"></script>
 <script>
@@ -372,6 +411,55 @@ foxWrap.querySelector('a').addEventListener('click', (e) => {
 document.addEventListener('click', (e) => {
   if (!foxWrap.contains(e.target)) foxWrap.classList.remove('is-open');
 });
+
+/* ---------- Product photo lightbox ---------- */
+const PRODUCT_PHOTOS = {
+  love: [1,2,3,4,5].map(i => 'assets/products/love-' + i + '.jpg'),
+  hate: [1,2,3,4,5].map(i => 'assets/products/hate-' + i + '.jpg')
+};
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCount = document.getElementById('lbCount');
+let lbProduct = 'love', lbIdx = 0;
+function lbShow(i) {
+  const list = PRODUCT_PHOTOS[lbProduct];
+  lbIdx = (i + list.length) % list.length;
+  lbImg.src = list[lbIdx];
+  lbCount.textContent = (lbIdx + 1) + ' / ' + list.length;
+  [lbIdx + 1, lbIdx - 1].forEach(j => { const im = new Image(); im.src = list[(j + list.length) % list.length]; });
+}
+function lbOpen(p, i) {
+  lbProduct = p;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  lbShow(i);
+}
+function lbHide() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+  lbImg.src = '';
+}
+document.querySelectorAll('.pv').forEach(b => {
+  b.addEventListener('click', () => lbOpen(b.dataset.product, parseInt(b.dataset.idx, 10)));
+});
+document.getElementById('lbClose').addEventListener('click', lbHide);
+document.getElementById('lbBackdrop').addEventListener('click', lbHide);
+document.getElementById('lbPrev').addEventListener('click', () => lbShow(lbIdx - 1));
+document.getElementById('lbNext').addEventListener('click', () => lbShow(lbIdx + 1));
+document.addEventListener('keydown', (e) => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') lbHide();
+  if (e.key === 'ArrowRight') lbShow(lbIdx + 1);
+  if (e.key === 'ArrowLeft') lbShow(lbIdx - 1);
+});
+let lbTouchX = null;
+lb.addEventListener('touchstart', (e) => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+lb.addEventListener('touchend', (e) => {
+  if (lbTouchX === null) return;
+  const dx = e.changedTouches[0].clientX - lbTouchX;
+  if (Math.abs(dx) > 40) lbShow(lbIdx + (dx < 0 ? 1 : -1));
+  lbTouchX = null;
+}, { passive: true });
 
 /* ---------- Mobile burger menu ---------- */
 const headerEl = document.querySelector('header');
