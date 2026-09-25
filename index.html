@@ -277,11 +277,22 @@ tailwind.config = {
               </form>
             </div>
             <div class="order-2 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2 grid grid-cols-[1fr] sm:grid-cols-[1fr_170px] gap-3">
-              <div class="bg-inactive rounded-xl aspect-[4/3] sm:aspect-auto sm:min-h-[510px]"></div>
-              <div class="grid grid-cols-3 sm:grid-rows-3 sm:grid-cols-1 gap-3">
-                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
-                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
-                <div class="bg-inactive rounded-xl aspect-square sm:aspect-auto row-span-1"></div>
+              <button type="button" class="pv rounded-xl overflow-hidden aspect-[4/3] sm:aspect-auto sm:min-h-[720px]" data-product="running" data-idx="0" aria-label="View photo">
+                <img src="assets/products/running-1-s.jpg" alt="Running cap — front" class="w-full h-full object-cover" loading="lazy">
+              </button>
+              <div class="grid grid-cols-4 sm:grid-rows-4 sm:grid-cols-1 gap-3">
+                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="running" data-idx="1" aria-label="View photo">
+                  <img src="assets/products/running-2-s.jpg" alt="Running cap — side" class="w-full h-full object-cover" loading="lazy">
+                </button>
+                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="running" data-idx="2" aria-label="View photo">
+                  <img src="assets/products/running-3-s.jpg" alt="Running cap — back" class="w-full h-full object-cover" loading="lazy">
+                </button>
+                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="running" data-idx="3" aria-label="View photo">
+                  <img src="assets/products/running-4-s.jpg" alt="Running cap on model — front" class="w-full h-full object-cover" loading="lazy">
+                </button>
+                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="running" data-idx="4" aria-label="View photo">
+                  <img src="assets/products/running-5-s.jpg" alt="Running cap on model — back" class="w-full h-full object-cover" loading="lazy">
+                </button>
               </div>
             </div>
           </div>
@@ -419,7 +430,8 @@ document.addEventListener('click', (e) => {
 /* ---------- Product photo lightbox ---------- */
 const PRODUCT_PHOTOS = {
   love: [1,2,3,4,5].map(i => 'assets/products/love-' + i + '.jpg'),
-  hate: [1,2,3,4,5].map(i => 'assets/products/hate-' + i + '.jpg')
+  hate: [1,2,3,4,5].map(i => 'assets/products/hate-' + i + '.jpg'),
+  running: [1,2,3,4,5].map(i => 'assets/products/running-' + i + '.jpg')
 };
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lbImg');
