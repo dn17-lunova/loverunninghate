@@ -17,6 +17,33 @@ document.querySelectorAll('.product-gallery').forEach(gallery => {
   gallery.querySelector('[data-next]').addEventListener('click', () => show(current() + 1));
   thumbs.forEach((button, i) => button.addEventListener('click', () => show(i)));
   track.addEventListener('scroll', update, { passive: true });
+  let drag = null;
+  let moved = false;
+  track.addEventListener('dragstart', event => event.preventDefault());
+  track.addEventListener('pointerdown', event => {
+    moved = false;
+    if (event.pointerType !== 'mouse' || event.button !== 0) return;
+    drag = { x: event.clientX, left: track.scrollLeft };
+    track.setPointerCapture(event.pointerId);
+  });
+  track.addEventListener('pointermove', event => {
+    if (!drag) return;
+    const distance = event.clientX - drag.x;
+    if (Math.abs(distance) > 8) moved = true;
+    if (!moved) return;
+    track.classList.add('is-dragging');
+    track.scrollLeft = drag.left - distance;
+  });
+  function finishDrag() {
+    if (!drag) return;
+    drag = null;
+    const index = current();
+    track.classList.remove('is-dragging');
+    if (moved) show(index);
+  }
+  track.addEventListener('pointerup', finishDrag);
+  track.addEventListener('pointercancel', finishDrag);
+  track.addEventListener('click', () => { if (!moved) show(current() + 1); });
   track.addEventListener('keydown', event => {
     if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
     event.preventDefault();
