@@ -20,7 +20,7 @@ for (const tag of ['og:title', 'og:description', 'og:url', 'og:image', 'twitter:
 assert.ok(existsSync(new URL('../assets/social-preview.png', import.meta.url)));
 assert.ok(readFileSync(new URL('../robots.txt', import.meta.url), 'utf8').includes('Sitemap: https://loverunninghate.com/sitemap.xml'));
 const sitemap = readFileSync(new URL('../sitemap.xml', import.meta.url), 'utf8');
-assert.deepEqual([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]), ['https://loverunninghate.com/']);
+assert.deepEqual([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]), ['https://loverunninghate.com/', ...['love', 'running', 'hate'].map(key => `https://loverunninghate.com/products/${key}-cap/`)]);
 
 function makeForm(product) {
   const field = { value: ' runner@example.test ', disabled: false, readOnly: false, focus() { this.focused = true; } };
@@ -28,7 +28,7 @@ function makeForm(product) {
   const status = { textContent: '' };
   const attributes = {};
   return {
-    field, button, status, attributes, valid: true,
+    field, button, status, attributes, dataset: {}, valid: true,
     querySelector(selector) { return selector.startsWith('input') ? field : selector.startsWith('button') ? button : status; },
     closest() { return { dataset: { product } }; },
     reportValidity() { return this.valid; },
@@ -102,3 +102,37 @@ products[0].valid = false;
 await submit(products[0]);
 assert.equal(requests, count, 'Invalid email must not send a request');
 console.log('PASS: metadata, schema, sitemap, four labeled fields; signup success, retry, offline, timeout, duplicate and invalid-submit checks.');
+
+// Standalone product pages must keep the selected cap as their signup source.
+const standalone = makeForm();
+standalone.dataset.source = 'love';
+const productContext = {
+  ...context,
+  document: { querySelectorAll: () => [], getElementById: () => standalone }
+};
+vm.runInNewContext(script, productContext);
+pending = submit(standalone);
+assert.equal(JSON.parse(request.body).source, 'love');
+respond({ ok: true });
+await pending;
+assert.ok(standalone.field.disabled);
+console.log('PASS: standalone product signup preserves its source.');
+
+// Real product documents must be discoverable and share the working form handler.
+const pageTitles = new Set();
+for (const key of ['love', 'running', 'hate']) {
+  const page = readFileSync(new URL(`../products/${key}-cap/index.html`, import.meta.url), 'utf8');
+  assert.equal((page.match(/<h1\b/g) || []).length, 1);
+  assert.ok(page.includes(`rel="canonical" href="https://loverunninghate.com/products/${key}-cap/"`));
+  assert.ok(page.includes(`data-source="${key}"`));
+  assert.ok(page.includes('Pre-launch. Not available to buy yet.'));
+  assert.ok(page.includes('UK, US and Europe'));
+  assert.ok(page.includes('£50'));
+  assert.ok(html.includes(`href="/products/${key}-cap/"`));
+  pageTitles.add(page.match(/<title>(.*?)<\/title>/)[1]);
+  for (const match of page.matchAll(/(?:src|href)="(\/assets\/[^"?#]+)"/g)) {
+    assert.ok(existsSync(new URL(`..${match[1]}`, import.meta.url)), match[1]);
+  }
+}
+assert.equal(pageTitles.size, 3);
+console.log('PASS: all product pages have unique titles, canonicals, confirmed facts, homepage links and valid assets.');

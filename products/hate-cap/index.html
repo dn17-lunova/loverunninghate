@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hate Cap “Why Am I Doing This” — Love Running Hate</title>
+<meta name="description" content="Pre-launch Hate Cap “Why Am I Doing This” by Love Running Hate. 100% cotton, one size, designed in the UK. View the cap and join the launch list.">
+<link rel="canonical" href="https://loverunninghate.com/products/hate-cap/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Love Running Hate">
+<meta property="og:title" content="Hate Cap “Why Am I Doing This” — Love Running Hate">
+<meta property="og:description" content="Pre-launch Hate Cap “Why Am I Doing This” by Love Running Hate. 100% cotton, one size, designed in the UK. View the cap and join the launch list.">
+<meta property="og:url" content="https://loverunninghate.com/products/hate-cap/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://loverunninghate.com/assets/social-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Love Running Hate — three cotton caps for every running mood.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hate Cap “Why Am I Doing This” — Love Running Hate">
+<meta name="twitter:description" content="Pre-launch Hate Cap “Why Am I Doing This” by Love Running Hate. 100% cotton, one size, designed in the UK. View the cap and join the launch list.">
+<meta name="twitter:image" content="https://loverunninghate.com/assets/social-preview.png">
+<meta name="twitter:image:alt" content="Love Running Hate — three cotton caps for every running mood.">
+<link rel="icon" type="image/svg+xml" href="/assets/logo-fox-red.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: '#DF0000',
+        page: '#F4F4F4',
+        inactive: '#D8D8D8',
+      },
+      fontFamily: {
+        sans: ['"Instrument Sans"', 'system-ui', 'sans-serif'],
+      },
+    }
+  }
+}
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: "Instrument Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .tracking-display { letter-spacing: -0.03em; }
+
+  /* ---- Fox hover message card ---- */
+  .fox-card {
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  .fox-wrap:hover .fox-card,
+  .fox-wrap.is-open .fox-card {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .fox-logo .fox-red { display: none; }
+  .fox-wrap:hover .fox-logo .fox-black,
+  .fox-wrap.is-open .fox-logo .fox-black { display: none; }
+  .fox-wrap:hover .fox-logo .fox-red,
+  .fox-wrap.is-open .fox-logo .fox-red { display: block; }
+
+  /* ---- Accordion ---- */
+  .acc-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .45s cubic-bezier(.4,0,.2,1);
+  }
+  .acc-item.open .acc-body { grid-template-rows: 1fr; }
+  .acc-body > div { overflow: hidden; }
+  .acc-item.open .acc-title { color: #DF0000; }
+  .acc-toggle .icon-minus { display: none; }
+  .acc-item.open .acc-toggle .icon-plus { display: none; }
+  .acc-item.open .acc-toggle .icon-minus { display: block; }
+
+  /* buttons */
+  .btn-primary { background: #DF0000; color: #fff; transition: background .2s ease, color .2s ease; }
+  .btn-primary:hover:not(:disabled) { background: #000; color: #fff; }
+  .btn-primary:disabled { background: #fff; color: #000; border: 1px solid #D8D8D8; cursor: not-allowed; }
+  .btn-hero { background: #DF0000; color: #fff; transition: background .2s ease, color .2s ease; }
+  .btn-hero:hover { background: #fff; color: #DF0000; }
+
+  .footer-link { color: #000; text-decoration: none; transition: color .2s ease; }
+  .footer-link:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+
+  input.email-field::placeholder { color: #666; }
+  .email-label { display: block; margin-bottom: 8px; font-size: 14px; text-align: left; }
+  .form-status { margin-top: 12px; font-size: 14px; line-height: 1.5; text-align: left; }
+  .form-status:empty { display: none; }
+  .email-field:focus-visible { outline: 2px solid #000; outline-offset: 3px; }
+
+  /* ---- Mobile burger menu ---- */
+  .mobile-menu {
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  header.menu-open .mobile-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .burger-line { transition: transform .25s ease, opacity .2s ease; }
+  header.menu-open .burger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  header.menu-open .burger-line:nth-child(2) { opacity: 0; }
+  header.menu-open .burger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ---- Product photos & lightbox ---- */
+  .pv img { transition: transform .35s ease; }
+  .pv:hover img { transform: scale(1.04); }
+  .lb { display: none; }
+  .lb.open { display: flex; }
+  .lb-arrow {
+    color: #fff; font-size: 56px; line-height: 1; padding: 12px 18px;
+    transition: color .2s ease; user-select: none;
+  }
+  .lb-arrow:hover { color: #DF0000; }
+</style>
+</head>
+<body class="bg-page text-black">
+<header class="sticky top-3 sm:top-5 z-50 mx-auto w-[calc(100%-2rem)] max-w-[1200px]">
+  <nav aria-label="Main navigation" class="bg-white rounded-full px-6 sm:px-12 h-[60px] sm:h-[76px] flex items-center justify-between shadow-[0_2px_20px_rgba(0,0,0,0.04)]">
+    <a href="/" aria-label="Love Running Hate — home"><img src="/assets/logo-fox.svg" width="97" height="37" alt="Love Running Hate" class="h-7 sm:h-9 w-auto"></a>
+    <div class="flex items-center gap-5 sm:gap-10 text-[15px] sm:text-[17px]"><a href="/#about" class="hover:text-brand">about</a><a href="/#products" class="hover:text-brand">products</a></div>
+  </nav>
+</header>
+<main class="mx-auto max-w-[1200px] px-4 pt-14 sm:pt-20 pb-20 sm:pb-32">
+  <nav aria-label="Breadcrumb" class="text-[14px] mb-8"><a href="/" class="underline underline-offset-4">Home</a> / <a href="/#products" class="underline underline-offset-4">Products</a> / <span aria-current="page">Hate Cap</span></nav>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-7 lg:gap-x-16 lg:gap-y-7 items-start">
+      <h1 id="product-title" class="order-1 lg:col-start-2 lg:row-start-1 tracking-display font-bold text-[44px] sm:text-[64px] leading-[1.05]">Hate Cap<br><span class="text-brand">“Why Am I Doing This”</span></h1>
+
+    <div class="order-2 lg:col-start-1 lg:row-start-1 lg:row-span-2 grid grid-cols-4 gap-3" aria-label="Hate Cap photos"><a href="/assets/products/hate-1.jpg" class="col-span-4 block rounded-xl overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4" aria-label="View hate cap front photo"><img src="/assets/products/hate-1-s.jpg" width="900" height="1069" alt="Hate Cap — front" class="w-full h-auto aspect-[4/3] lg:aspect-auto object-cover" fetchpriority="high"></a>
+<a href="/assets/products/hate-2.jpg" class=" block rounded-xl overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4" aria-label="View hate cap side photo"><img src="/assets/products/hate-2-s.jpg" width="900" height="1069" alt="Hate Cap — side" class="w-full h-auto" loading="lazy"></a>
+<a href="/assets/products/hate-3.jpg" class=" block rounded-xl overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4" aria-label="View hate cap back photo"><img src="/assets/products/hate-3-s.jpg" width="900" height="1069" alt="Hate Cap — back" class="w-full h-auto" loading="lazy"></a>
+<a href="/assets/products/hate-4.jpg" class=" block rounded-xl overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4" aria-label="View hate cap on model — front photo"><img src="/assets/products/hate-4-s.jpg" width="900" height="1069" alt="Hate Cap — on model — front" class="w-full h-auto" loading="lazy"></a>
+<a href="/assets/products/hate-5.jpg" class=" block rounded-xl overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4" aria-label="View hate cap on model — back photo"><img src="/assets/products/hate-5-s.jpg" width="900" height="1069" alt="Hate Cap — on model — back" class="w-full h-auto" loading="lazy"></a>
+</div>
+    <section class="order-3 lg:col-start-2 lg:row-start-2" aria-labelledby="product-title">
+      <p class="text-[20px]">£50</p>
+      <p class="mt-3 text-[16px] leading-relaxed">Pre-launch. Not available to buy yet.</p>
+      <dl class="mt-7 text-[16px] leading-relaxed space-y-3">
+        <div class="flex justify-between gap-6 border-b border-inactive pb-3"><dt>Material</dt><dd>100% cotton</dd></div>
+        <div class="flex justify-between gap-6 border-b border-inactive pb-3"><dt>Size</dt><dd>One size</dd></div>
+        <div class="flex justify-between gap-6 border-b border-inactive pb-3"><dt>Design</dt><dd>Designed in the UK</dd></div>
+        <div class="flex justify-between gap-6 border-b border-inactive pb-3"><dt>Planned shipping</dt><dd class="text-right">UK, US and Europe</dd></div>
+      </dl>
+      <p class="mt-7 text-[16px] leading-relaxed">Love Running Hate makes gear for the days you fly, the days you drag and the days you go anyway.</p>
+      <h2 class="mt-9 tracking-display font-semibold text-[24px]">Be first to know</h2>
+      <p class="mt-3 text-[16px]">Join the list for launch updates about this cap.</p>
+      <form id="subscribeForm" data-source="hate" class="mt-5 max-w-[420px]">
+        <label for="productEmail" class="email-label">Email address</label>
+        <input id="productEmail" name="email" type="email" autocomplete="email" required aria-describedby="productStatus" placeholder="Enter your email" class="email-field w-full h-[56px] rounded-full border border-inactive bg-transparent px-6 text-[16px]">
+        <button type="submit" class="btn-primary mt-3 w-full h-[56px] rounded-full text-[17px] font-medium">Notify me</button>
+        <p id="productStatus" class="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      </form>
+      <p class="mt-5 text-[14px] leading-relaxed">Launch date, delivery charges and timings are not yet confirmed.</p>
+      <div class="mt-10 border-t border-inactive pt-6"><h2 class="font-semibold text-[20px]">Every kind of run</h2><div class="flex flex-wrap gap-6 mt-4"><a href="/products/love-cap/" class="underline underline-offset-4 hover:text-brand">Love Cap</a><a href="/products/running-cap/" class="underline underline-offset-4 hover:text-brand">Running Cap</a></div></div>
+    </section>
+  </div>
+</main>
+<footer class="bg-brand"><div class="max-w-[1200px] mx-auto px-4 pt-10 pb-6"><nav aria-label="Footer" class="flex flex-wrap justify-center gap-6 text-[14px] uppercase"><a href="/" class="footer-link">Home</a><a href="/#products" class="footer-link">All caps</a><a href="mailto:hello@lrh.com" class="footer-link">hello@lrh.com</a></nav><img src="/assets/wordmark.png" width="2880" height="539" alt="LOVE RUNNING HATE" class="w-full h-auto mt-10"></div></footer>
+<script src="/assets/subscribe.js"></script>
+</body>
+</html>
