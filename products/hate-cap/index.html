@@ -123,7 +123,7 @@ tailwind.config = {
   }
   .lb-arrow:hover { color: #DF0000; }
 </style>
-<link rel="stylesheet" href="/assets/product-gallery.css">
+<link rel="stylesheet" href="/assets/product-gallery.css?v=2">
 </head>
 <body class="bg-page text-black">
 <header class="sticky top-3 sm:top-5 z-50 mx-auto w-[calc(100%-2rem)] max-w-[1200px]">
@@ -138,6 +138,7 @@ tailwind.config = {
       <h1 id="product-title" class="order-1 lg:col-start-2 lg:row-start-1 tracking-display font-bold text-[36px] sm:text-[52px] leading-[1.05]">Hate Cap<br><span class="text-brand">“Why Am I Doing This”</span></h1>
 
     <section class="product-gallery order-2 lg:col-start-1 lg:row-start-1 lg:row-span-2" aria-label="Hate Cap photos" aria-roledescription="carousel">
+      <div class="gallery-stage">
       <div id="cap-photos" class="gallery-track" tabindex="0" aria-label="Product photos — swipe or use arrow keys">
         <div class="gallery-slide"><img src="/assets/products/hate-1-s.jpg" width="900" height="1069" alt="Hate Cap — front" fetchpriority="high"></div>
         <div class="gallery-slide"><img src="/assets/products/hate-2-s.jpg" width="900" height="1069" alt="Hate Cap — side" loading="lazy"></div>
@@ -149,6 +150,7 @@ tailwind.config = {
         <button type="button" data-prev aria-label="Previous photo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <span role="status" aria-live="polite" aria-atomic="true">1 / 5</span>
         <button type="button" data-next aria-label="Next photo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
       </div>
       <div class="gallery-thumbs" aria-label="Choose a photo">
         <button type="button" aria-label="Show hate cap front photo" aria-controls="cap-photos" aria-pressed="true"><img src="/assets/products/hate-1-s.jpg" width="900" height="1069" alt="" loading="lazy"></button>
@@ -182,7 +184,7 @@ tailwind.config = {
   </div>
 </main>
 <footer class="bg-brand"><div class="max-w-[1200px] mx-auto px-4 pt-10 pb-6"><nav aria-label="Footer" class="flex flex-wrap justify-center gap-6 text-[14px] uppercase"><a href="/" class="footer-link">Home</a><a href="/#products" class="footer-link">All caps</a><a href="mailto:hello@lrh.com" class="footer-link">hello@lrh.com</a></nav><img src="/assets/wordmark.png" width="2880" height="539" alt="LOVE RUNNING HATE" class="w-full h-auto mt-10"></div></footer>
-<script src="/assets/product-gallery.js"></script>
+<script src="/assets/product-gallery.js?v=2"></script>
 <script src="/assets/subscribe.js"></script>
 </body>
 </html>

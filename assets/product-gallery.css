@@ -1,9 +1,14 @@
 .product-gallery { min-width: 0; }
-.gallery-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: #D8D8D8 #F4F4F4; border-radius: 12px; }
+.gallery-stage { position: relative; margin-bottom: 12px; }
+.gallery-track { cursor: grab; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: #D8D8D8 #F4F4F4; border-radius: 12px; }
 .gallery-slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; scroll-snap-stop: always; }
 .gallery-slide img { display: block; width: 100%; height: auto; aspect-ratio: 900 / 1069; object-fit: cover; }
-.gallery-controls { display: flex; align-items: center; justify-content: space-between; margin: 12px 0; }
-.gallery-controls button { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: white; color: black; }
+.gallery-controls { position: absolute; inset: 12px; pointer-events: none; }
+.gallery-controls [role="status"] { position: absolute; bottom: 0; right: 0; background: white; padding: 6px 12px; border-radius: 999px; font-size: 14px; }
+.gallery-controls button { pointer-events: auto; position: absolute; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: white; color: black; }
+.gallery-controls [data-prev] { left: 0; }
+.gallery-controls [data-next] { right: 0; }
+.gallery-track.is-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
 .gallery-controls button:hover { background: #DF0000; color: white; }
 .gallery-thumbs { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 8px; }
 .gallery-thumbs button { padding: 3px; border-radius: 8px; border: 2px solid transparent; }
