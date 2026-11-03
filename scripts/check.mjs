@@ -125,6 +125,10 @@ for (const key of ['love', 'running', 'hate']) {
   assert.equal((page.match(/<h1\b/g) || []).length, 1);
   assert.ok(page.includes(`rel="canonical" href="https://loverunninghate.com/products/${key}-cap/"`));
   assert.ok(page.includes(`data-source="${key}"`));
+  assert.ok(page.includes('/assets/product-gallery.js'));
+  assert.equal((page.match(/class="gallery-slide"/g) || []).length, 5);
+  assert.equal((page.match(/aria-pressed="/g) || []).length, 5);
+  assert.ok(!page.includes('href="/assets/products/'), 'Product photos must stay on the page');
   assert.ok(page.includes('Pre-launch. Not available to buy yet'));
   assert.ok(page.includes('UK, US and Europe'));
   assert.ok(page.includes('£50'));
