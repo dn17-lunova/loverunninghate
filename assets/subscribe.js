@@ -44,4 +44,5 @@ function bindForm(form, source) {
 document.querySelectorAll('.notify-form').forEach(form => {
   bindForm(form, form.closest('.acc-item').dataset.product.toLowerCase());
 });
-bindForm(document.getElementById('subscribeForm'), 'subscribe');
+const standaloneForm = document.getElementById('subscribeForm');
+if (standaloneForm) bindForm(standaloneForm, standaloneForm.dataset.source || 'subscribe');
