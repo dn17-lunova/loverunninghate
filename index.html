@@ -91,19 +91,6 @@ tailwind.config = {
   .fox-wrap:hover .fox-logo .fox-red,
   .fox-wrap.is-open .fox-logo .fox-red { display: block; }
 
-  /* ---- Accordion ---- */
-  .acc-body {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows .45s cubic-bezier(.4,0,.2,1);
-  }
-  .acc-item.open .acc-body { grid-template-rows: 1fr; }
-  .acc-body > div { overflow: hidden; }
-  .acc-item.open .acc-title { color: #DF0000; }
-  .acc-toggle .icon-minus { display: none; }
-  .acc-item.open .acc-toggle .icon-plus { display: none; }
-  .acc-item.open .acc-toggle .icon-minus { display: block; }
-
   /* buttons */
   .btn-primary { background: #DF0000; color: #fff; transition: background .2s ease, color .2s ease; }
   .btn-primary:hover:not(:disabled) { background: #000; color: #fff; }
@@ -147,6 +134,71 @@ tailwind.config = {
     transition: color .2s ease; user-select: none;
   }
   .lb-arrow:hover { color: #DF0000; }
+
+  ::selection { background: #DF0000; color: #fff; }
+  a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid #000; outline-offset: 5px; }
+  .intro { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 48px; padding-top: 64px; padding-bottom: 88px; }
+  .intro h1 { font-size: clamp(44px, 4.5vw, 64px); line-height: 1; }
+  .intro-copy > p { max-width: 410px; font-size: 18px; line-height: 1.6; margin-top: 28px; }
+  .intro-action { display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 32px; border-radius: 999px; margin-top: 32px; font-size: 17px; }
+  .intro-photo { min-width: 0; }
+  .intro-photo a { display: block; min-width: 0; }
+  .intro-portraits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .intro-photo img { mix-blend-mode: darken; width: 100%; height: 360px; object-fit: cover; object-position: center 30%; border-radius: 12px; }
+  .intro-photo figcaption { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); text-align: center; gap: 8px; margin-top: 14px; font-size: 14px; }
+  .caps-intro { text-align: center; }
+  .caps-intro h2 { font-size: 44px; line-height: 1.1; }
+  .caps-intro p { font-size: 15px; line-height: 1.6; margin-top: 16px; }
+  .caps-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; margin-top: 32px; }
+  .cap-card { min-width: 0; text-align: center; }
+  .cap-photo { width: 100%; display: block; overflow: hidden; border-radius: 16px; background: #eee; }
+  .cap-photo img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .cap-heading { display: flex; align-items: baseline; justify-content: center; gap: 16px; margin-top: 20px; }
+  .cap-heading h3 { font-size: 36px; font-weight: 700; letter-spacing: -.03em; line-height: 1.1; }
+  .cap-heading a:hover { color: #DF0000; }
+  .cap-phrase { margin-top: 8px; font-size: 16px; }
+  .cap-link { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 48px; margin-top: 12px; text-decoration: underline; text-underline-offset: 5px; }
+  .cap-link:hover { color: #DF0000; }
+  .caps-facts { margin-top: 32px; font-size: 15px; text-align: center; }
+  .caps-action { text-align: center; margin-top: 24px; }
+  .caps-action .intro-action { margin-top: 0; }
+  .brand-story { display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; margin-top: 96px; }
+  .story-copy { padding: 40px; }
+  .story-copy h2 { font-size: 48px; line-height: 1.05; margin-bottom: 28px; }
+  .story-copy p { font-size: 16px; line-height: 1.6; max-width: 52ch; margin-top: 20px; }
+  .story-photo { width: 100%; height: 100%; object-fit: cover; min-height: 360px; }
+  @media (max-width: 900px) {
+    .intro { gap: 24px; }
+    .intro h1 { font-size: 44px; }
+    .intro-photo img { height: 260px; }
+    .caps-grid { gap: 16px; }
+    .cap-heading h3 { font-size: 30px; }
+    .cap-phrase { min-height: 48px; }
+    .brand-story { grid-template-columns: 1fr 1fr; }
+    .story-copy { padding: 28px; }
+    .story-copy h2 { font-size: 36px; }
+  }
+  @media (max-width: 639px) {
+    .intro { grid-template-columns: 1fr; padding-top: 40px; padding-bottom: 56px; gap: 28px; }
+    .intro h1 { font-size: clamp(32px, 9.6vw, 46px); }
+    .intro-copy > p { font-size: 16px; margin-top: 20px; max-width: 34ch; }
+    .intro-action { margin-top: 20px; min-height: 50px; }
+    .intro-photo img { height: 200px; object-position: center 25%; }
+    .intro-photo figcaption { font-size: 13px; }
+    .caps-intro { display: block; }
+    .caps-intro h2 { font-size: 34px; }
+    .caps-intro p { margin-top: 16px; font-size: 14px; }
+    .caps-grid { grid-template-columns: 1fr; gap: 36px; margin-top: 24px; }
+    .cap-photo img { aspect-ratio: 4 / 3; }
+    .cap-heading h3 { font-size: 36px; }
+    .cap-phrase { min-height: 0; }
+    .brand-story { grid-template-columns: 1fr; margin-top: 64px; }
+    .story-photo { height: 320px; min-height: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; }
+  }
 </style>
 </head>
 <body class="bg-page text-black">
@@ -178,8 +230,8 @@ tailwind.config = {
     </div>
     <!-- Nav (desktop) -->
     <nav class="hidden sm:flex items-center gap-14 text-[17px]">
-      <a href="#about" class="hover:text-brand transition-colors">about</a>
       <a href="#products" class="hover:text-brand transition-colors">products</a>
+      <a href="#about" class="hover:text-brand transition-colors">about</a>
       <a href="#subscribe" class="hover:text-brand transition-colors">subscribe</a>
     </nav>
     <!-- Burger (mobile) -->
@@ -192,8 +244,8 @@ tailwind.config = {
   <!-- Mobile menu panel -->
   <div id="mobileMenu" class="mobile-menu sm:hidden absolute left-0 right-0 top-[calc(100%+8px)] bg-white rounded-3xl shadow-[0_16px_48px_rgba(0,0,0,0.14)] px-7 py-8 z-40">
     <nav class="flex flex-col gap-6">
-      <a href="#about" class="tracking-display font-semibold text-[34px] leading-none">about</a>
       <a href="#products" class="tracking-display font-semibold text-[34px] leading-none">products</a>
+      <a href="#about" class="tracking-display font-semibold text-[34px] leading-none">about</a>
       <a href="#subscribe" class="tracking-display font-semibold text-[34px] leading-none">subscribe</a>
     </nav>
     <div class="mt-8 pt-6 border-t border-inactive">
@@ -204,202 +256,68 @@ tailwind.config = {
 </header>
 
 <!-- ===================== HERO ===================== -->
-<section id="top" class="mx-auto max-w-[1200px] px-4 pt-24 sm:pt-40 pb-24 sm:pb-40 text-center">
-  <h1 class="tracking-display font-bold leading-[0.95] text-[44px] sm:text-[72px] lg:text-[90px]">
-    Do you love running<br class="hidden sm:block">
-    <span class="sm:hidden"> </span>or do you hate it?<br>
-    <span class="text-brand">Usually both</span>
-  </h1>
-  <p class="mx-auto mt-8 sm:mt-12 max-w-[620px] text-[17px] sm:text-[20px] leading-relaxed">
-    Love Running Hate makes gear for the days you fly, the days you<br class="hidden sm:block">
-    drag and the days you go anyway
-  </p>
-  <a href="#products" class="btn-hero inline-block mt-10 sm:mt-14 rounded-full px-12 h-[56px] sm:h-[60px] leading-[56px] sm:leading-[60px] text-[18px] font-medium">
-    Choose your state
-  </a>
-</section>
-
-<!-- ===================== ABOUT ===================== -->
-<section id="about" class="mx-auto max-w-[1200px] px-4 scroll-mt-28">
-  <div class="bg-white rounded-3xl px-7 sm:px-7 py-9">
-    <h2 class="tracking-display font-semibold text-[24px] sm:text-[32px] leading-tight max-w-[1150px]">
-      We all started <a href="#products" class="text-brand">for the usual reasons</a> — get fitter, lose a few kilos, train for a race we signed up for after two beers
-    </h2>
-    <p class="mt-6 text-[15px] sm:text-[16px] leading-normal max-w-[1150px]">
-      That part lasted a month, maybe two. What kept us going afterwards was something else entirely, and honestly, we're still not sure we can name it. Running just became part of who we are. Even on the weeks we hate it
-    </p>
+<section id="top" class="intro mx-auto max-w-[1200px] px-4 scroll-mt-28">
+  <div class="intro-copy">
+    <h1 class="tracking-display font-bold">Do you love running<br>or do you hate it?<br><span class="text-brand">Usually both</span></h1>
+    <p>Three cotton caps for the days you fly, the days you drag and the days you go anyway</p>
+    <a href="#products" class="btn-hero intro-action">Choose your state</a>
   </div>
-
-  <div class="mt-4 grid grid-cols-1 lg:grid-cols-[1fr_490px] gap-4">
-    <div class="bg-brand rounded-3xl px-7 py-10 text-white order-1">
-      <h2 class="tracking-display font-semibold text-[30px] sm:text-[40px] leading-[1.1]">
-        We got tired of ads where every run is easy, every sky is clear and everyone finishes. Whoever those people are, they don't run with us
-      </h2>
-      <p class="mt-8 text-[15px] sm:text-[16px] leading-normal max-w-[620px]">
-        Love Running Hate is made for the whole thing. The mornings when everything clicks and you feel like you could go forever. And the ones where nothing clicks at all – you just get it done and go home.
-      </p>
-      <p class="mt-5 text-[15px] sm:text-[16px] leading-normal max-w-[620px]">
-        If you know both, you know why the name isn't Love Running. It's the full sentence
-      </p>
+  <figure class="intro-photo">
+    <div class="intro-portraits">
+      <a href="/products/love-cap/" aria-label="Explore the Love Cap"><img src="assets/products/love-4-s.jpg" alt="Love cap worn on a model" width="900" height="1069" fetchpriority="high"></a>
+      <a href="/products/running-cap/" aria-label="Explore the Running Cap"><img src="assets/products/running-4-s.jpg" alt="Running cap worn on a model" width="900" height="1069" fetchpriority="high"></a>
+      <a href="/products/hate-cap/" aria-label="Explore the Hate Cap"><img src="assets/products/hate-4-s.jpg" alt="Hate cap worn on a model" width="900" height="1069" fetchpriority="high"></a>
     </div>
-    <div class="order-2 rounded-3xl overflow-hidden min-h-[280px]">
-      <img src="assets/runner.jpg" alt="Runner climbing a concrete ramp beside a red railing" class="w-full h-full object-cover">
-    </div>
-  </div>
+    <figcaption><span>Love</span><span>Running</span><span>Hate</span></figcaption>
+  </figure>
 </section>
 
 <!-- ===================== PRODUCTS ===================== -->
-<section id="products" class="mx-auto max-w-[1200px] px-4 mt-28 sm:mt-44 scroll-mt-28">
-  <div class="flex items-center gap-3 text-[22px] sm:text-[28px]">
-    <span>Choose your state</span>
-    <img src="assets/icon-arrow.svg" alt="" class="w-4 h-4 mt-1">
+<section id="products" class="caps mx-auto max-w-[1200px] px-4 scroll-mt-28">
+  <div class="caps-intro"><h2 class="tracking-display font-semibold">Choose your state</h2><p>£50 per cap · Pre-launch<br>Planned shipping to the UK, US and Europe</p></div>
+  <div class="caps-grid">
+    <article class="acc-item cap-card" data-product="Love">
+      <button type="button" class="pv cap-photo" data-product="love" data-idx="0" aria-label="View love cap photos">
+        <img src="assets/products/love-1-s.jpg" alt="Love cap — front" width="900" height="1069" loading="lazy">
+      </button>
+      <div class="cap-heading"><h3><a href="/products/love-cap/">Love</a></h3></div>
+      <p class="cap-phrase">“Chasing Endorphins”</p>
+      <a href="/products/love-cap/" class="cap-link">View love cap details <span aria-hidden="true">&rarr;</span></a>
+    </article>
+    <article class="acc-item cap-card" data-product="Running">
+      <button type="button" class="pv cap-photo" data-product="running" data-idx="0" aria-label="View running cap photos">
+        <img src="assets/products/running-1-s.jpg" alt="Running cap — front" width="900" height="1069" loading="lazy">
+      </button>
+      <div class="cap-heading"><h3><a href="/products/running-cap/">Running</a></h3></div>
+      <p class="cap-phrase">“Love Running Hate”</p>
+      <a href="/products/running-cap/" class="cap-link">View running cap details <span aria-hidden="true">&rarr;</span></a>
+    </article>
+    <article class="acc-item cap-card" data-product="Hate">
+      <button type="button" class="pv cap-photo" data-product="hate" data-idx="0" aria-label="View hate cap photos">
+        <img src="assets/products/hate-1-s.jpg" alt="Hate cap — front" width="900" height="1069" loading="lazy">
+      </button>
+      <div class="cap-heading"><h3><a href="/products/hate-cap/">Hate</a></h3></div>
+      <p class="cap-phrase">“Why Am I Doing This”</p>
+      <a href="/products/hate-cap/" class="cap-link">View hate cap details <span aria-hidden="true">&rarr;</span></a>
+    </article>
   </div>
-  <p class="mt-4 text-[16px] leading-relaxed">Pre-launch. £50 per cap. Planned shipping to the UK, US and Europe.</p>
+  <p class="caps-facts">100% cotton / One size / Designed in the UK</p>
+  <div class="caps-action"><a href="#subscribe" class="btn-hero intro-action">Get launch updates</a></div>
+</section>
 
-  <div class="mt-6 space-y-4">
-    <!-- ==== CARD template x3 ==== -->
-    <!-- LOVE -->
-    <div class="acc-item bg-white rounded-3xl" data-product="Love">
-      <button type="button" class="acc-head w-full flex items-center justify-between px-7 sm:px-9 py-8 sm:py-10 text-left" aria-expanded="false">
-        <span class="acc-title tracking-display font-bold text-[40px] sm:text-[64px] leading-none transition-colors hover:text-brand">Love</span>
-        <span class="acc-toggle w-12 h-12 rounded-full bg-page flex items-center justify-center shrink-0">
-          <svg class="icon-plus" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1v16M1 9h16" stroke="black" stroke-width="2"/></svg>
-          <svg class="icon-minus" width="18" height="18" viewBox="0 0 18 18"><path d="M1 9h16" stroke="black" stroke-width="2"/></svg>
-        </span>
-      </button>
-      <div class="acc-body">
-        <div>
-          <div class="px-7 sm:px-9 pb-9 flex flex-col lg:grid lg:grid-cols-[360px_1fr] lg:grid-rows-[auto_1fr] gap-8">
-            <p class="order-1 lg:col-start-1 lg:row-start-1 text-[16px] leading-normal">Love Cap “Chasing Endorphins”<br>100% cotton. One size. Designed in the UK<br><a href="/products/love-cap/" class="inline-block mt-4 underline underline-offset-4 hover:text-brand">View love cap details</a></p>
-            <div class="order-3 lg:order-none lg:col-start-1 lg:row-start-2">
-              <p class="text-[16px]">£50</p>
-              <form class="notify-form mt-4 max-w-[350px]">
-                <label for="loveEmail" class="email-label">Email address</label>
-                <input id="loveEmail" name="email" type="email" autocomplete="email" required aria-describedby="loveStatus" placeholder="Enter your email" class="email-field w-full h-[60px] rounded-full border border-inactive bg-transparent px-6 text-[16px] outline-none focus:border-neutral-500 transition-colors">
-                <button type="submit" class="btn-primary mt-3 w-full h-[60px] rounded-full text-[17px] font-medium">Notify me</button>
-                <p id="loveStatus" class="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
-              </form>
-            </div>
-            <div class="order-2 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2 grid grid-cols-[1fr] sm:grid-cols-[1fr_170px] gap-3">
-              <button type="button" class="pv rounded-xl overflow-hidden aspect-[4/3] sm:aspect-auto sm:min-h-[720px]" data-product="love" data-idx="0" aria-label="View photo">
-                <img src="assets/products/love-1-s.jpg" alt="Love cap — front" class="w-full h-full object-cover" loading="lazy">
-              </button>
-              <div class="grid grid-cols-4 sm:grid-rows-4 sm:grid-cols-1 gap-3">
-                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="love" data-idx="1" aria-label="View photo">
-                  <img src="assets/products/love-2-s.jpg" alt="Love cap — side" class="w-full h-full object-cover" loading="lazy">
-                </button>
-                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="love" data-idx="2" aria-label="View photo">
-                  <img src="assets/products/love-3-s.jpg" alt="Love cap — back" class="w-full h-full object-cover" loading="lazy">
-                </button>
-                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="love" data-idx="3" aria-label="View photo">
-                  <img src="assets/products/love-4-s.jpg" alt="Love cap on model — front" class="w-full h-full object-cover" loading="lazy">
-                </button>
-                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="love" data-idx="4" aria-label="View photo">
-                  <img src="assets/products/love-5-s.jpg" alt="Love cap on model — back" class="w-full h-full object-cover" loading="lazy">
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- RUNNING -->
-    <div class="acc-item bg-white rounded-3xl" data-product="Running">
-      <button type="button" class="acc-head w-full flex items-center justify-between px-7 sm:px-9 py-8 sm:py-10 text-left" aria-expanded="false">
-        <span class="acc-title tracking-display font-bold text-[40px] sm:text-[64px] leading-none transition-colors hover:text-brand">Running</span>
-        <span class="acc-toggle w-12 h-12 rounded-full bg-page flex items-center justify-center shrink-0">
-          <svg class="icon-plus" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1v16M1 9h16" stroke="black" stroke-width="2"/></svg>
-          <svg class="icon-minus" width="18" height="18" viewBox="0 0 18 18"><path d="M1 9h16" stroke="black" stroke-width="2"/></svg>
-        </span>
-      </button>
-      <div class="acc-body">
-        <div>
-          <div class="px-7 sm:px-9 pb-9 flex flex-col lg:grid lg:grid-cols-[360px_1fr] lg:grid-rows-[auto_1fr] gap-8">
-            <p class="order-1 lg:col-start-1 lg:row-start-1 text-[16px] leading-normal">Running Cap “Love Running Hate”<br>100% cotton. One size. Designed in the UK<br><a href="/products/running-cap/" class="inline-block mt-4 underline underline-offset-4 hover:text-brand">View running cap details</a></p>
-            <div class="order-3 lg:order-none lg:col-start-1 lg:row-start-2">
-              <p class="text-[16px]">£50</p>
-              <form class="notify-form mt-4 max-w-[350px]">
-                <label for="runningEmail" class="email-label">Email address</label>
-                <input id="runningEmail" name="email" type="email" autocomplete="email" required aria-describedby="runningStatus" placeholder="Enter your email" class="email-field w-full h-[60px] rounded-full border border-inactive bg-transparent px-6 text-[16px] outline-none focus:border-neutral-500 transition-colors">
-                <button type="submit" class="btn-primary mt-3 w-full h-[60px] rounded-full text-[17px] font-medium">Notify me</button>
-                <p id="runningStatus" class="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
-              </form>
-            </div>
-            <div class="order-2 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2 grid grid-cols-[1fr] sm:grid-cols-[1fr_170px] gap-3">
-              <button type="button" class="pv rounded-xl overflow-hidden aspect-[4/3] sm:aspect-auto sm:min-h-[720px]" data-product="running" data-idx="0" aria-label="View photo">
-                <img src="assets/products/running-1-s.jpg" alt="Running cap — front" class="w-full h-full object-cover" loading="lazy">
-              </button>
-              <div class="grid grid-cols-4 sm:grid-rows-4 sm:grid-cols-1 gap-3">
-                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="running" data-idx="1" aria-label="View photo">
-                  <img src="assets/products/running-2-s.jpg" alt="Running cap — side" class="w-full h-full object-cover" loading="lazy">
-                </button>
-                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="running" data-idx="2" aria-label="View photo">
-                  <img src="assets/products/running-3-s.jpg" alt="Running cap — back" class="w-full h-full object-cover" loading="lazy">
-                </button>
-                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="running" data-idx="3" aria-label="View photo">
-                  <img src="assets/products/running-4-s.jpg" alt="Running cap on model — front" class="w-full h-full object-cover" loading="lazy">
-                </button>
-                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="running" data-idx="4" aria-label="View photo">
-                  <img src="assets/products/running-5-s.jpg" alt="Running cap on model — back" class="w-full h-full object-cover" loading="lazy">
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- HATE -->
-    <div class="acc-item bg-white rounded-3xl" data-product="Hate">
-      <button type="button" class="acc-head w-full flex items-center justify-between px-7 sm:px-9 py-8 sm:py-10 text-left" aria-expanded="false">
-        <span class="acc-title tracking-display font-bold text-[40px] sm:text-[64px] leading-none transition-colors hover:text-brand">Hate</span>
-        <span class="acc-toggle w-12 h-12 rounded-full bg-page flex items-center justify-center shrink-0">
-          <svg class="icon-plus" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1v16M1 9h16" stroke="black" stroke-width="2"/></svg>
-          <svg class="icon-minus" width="18" height="18" viewBox="0 0 18 18"><path d="M1 9h16" stroke="black" stroke-width="2"/></svg>
-        </span>
-      </button>
-      <div class="acc-body">
-        <div>
-          <div class="px-7 sm:px-9 pb-9 flex flex-col lg:grid lg:grid-cols-[360px_1fr] lg:grid-rows-[auto_1fr] gap-8">
-            <p class="order-1 lg:col-start-1 lg:row-start-1 text-[16px] leading-normal">Hate Cap “Why Am I Doing This”<br>100% cotton. One size. Designed in the UK<br><a href="/products/hate-cap/" class="inline-block mt-4 underline underline-offset-4 hover:text-brand">View hate cap details</a></p>
-            <div class="order-3 lg:order-none lg:col-start-1 lg:row-start-2">
-              <p class="text-[16px]">£50</p>
-              <form class="notify-form mt-4 max-w-[350px]">
-                <label for="hateEmail" class="email-label">Email address</label>
-                <input id="hateEmail" name="email" type="email" autocomplete="email" required aria-describedby="hateStatus" placeholder="Enter your email" class="email-field w-full h-[60px] rounded-full border border-inactive bg-transparent px-6 text-[16px] outline-none focus:border-neutral-500 transition-colors">
-                <button type="submit" class="btn-primary mt-3 w-full h-[60px] rounded-full text-[17px] font-medium">Notify me</button>
-                <p id="hateStatus" class="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
-              </form>
-            </div>
-            <div class="order-2 lg:order-none lg:col-start-2 lg:row-start-1 lg:row-span-2 grid grid-cols-[1fr] sm:grid-cols-[1fr_170px] gap-3">
-              <button type="button" class="pv rounded-xl overflow-hidden aspect-[4/3] sm:aspect-auto sm:min-h-[720px]" data-product="hate" data-idx="0" aria-label="View photo">
-                <img src="assets/products/hate-1-s.jpg" alt="Hate cap — front" class="w-full h-full object-cover" loading="lazy">
-              </button>
-              <div class="grid grid-cols-4 sm:grid-rows-4 sm:grid-cols-1 gap-3">
-                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="hate" data-idx="1" aria-label="View photo">
-                  <img src="assets/products/hate-2-s.jpg" alt="Hate cap — side" class="w-full h-full object-cover" loading="lazy">
-                </button>
-                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="hate" data-idx="2" aria-label="View photo">
-                  <img src="assets/products/hate-3-s.jpg" alt="Hate cap — back" class="w-full h-full object-cover" loading="lazy">
-                </button>
-                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="hate" data-idx="3" aria-label="View photo">
-                  <img src="assets/products/hate-4-s.jpg" alt="Hate cap on model — front" class="w-full h-full object-cover" loading="lazy">
-                </button>
-                <button type="button" class="pv rounded-xl overflow-hidden aspect-square sm:aspect-auto row-span-1" data-product="hate" data-idx="4" aria-label="View photo">
-                  <img src="assets/products/hate-5-s.jpg" alt="Hate cap on model — back" class="w-full h-full object-cover" loading="lazy">
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- ===================== ABOUT ===================== -->
+<section id="about" class="brand-story mx-auto max-w-[1200px] px-4 scroll-mt-28">
+  <div class="story-copy bg-brand text-white rounded-3xl">
+    <h2 class="tracking-display font-semibold">For the days<br>you go anyway</h2>
+    <p>We got tired of ads where every run is easy, every sky is clear and everyone finishes. Whoever those people are, they don't run with us</p>
+    <p>Love Running Hate is made for the whole thing. The mornings when everything clicks. And the ones where you just get it done and go home</p>
+    <p>If you know both, you know why the name isn't Love Running. It's the full sentence</p>
   </div>
+  <img src="assets/runner.jpg" alt="Runner climbing a concrete ramp beside a red railing" class="story-photo rounded-3xl" loading="lazy">
 </section>
 
 <!-- ===================== SUBSCRIBE ===================== -->
-<section id="subscribe" class="mx-auto max-w-[1200px] px-4 mt-32 sm:mt-52 pb-32 sm:pb-48 text-center scroll-mt-28">
+<section id="subscribe" class="mx-auto max-w-[1200px] px-4 mt-20 sm:mt-28 pb-20 sm:pb-28 text-center scroll-mt-28">
   <h2 class="tracking-display font-bold text-[40px] sm:text-[72px] leading-none">Be first to know</h2>
   <p class="mt-6 text-[16px] sm:text-[18px]">First drop, restocks and nothing unnecessary</p>
   <form id="subscribeForm" class="mx-auto mt-10 max-w-[624px]">
@@ -536,15 +454,6 @@ burgerBtn.addEventListener('click', () => {
 });
 document.querySelectorAll('#mobileMenu a').forEach(a => {
   a.addEventListener('click', () => headerEl.classList.remove('menu-open'));
-});
-
-/* ---------- Accordion (independent items) ---------- */
-document.querySelectorAll('.acc-item').forEach(item => {
-  const head = item.querySelector('.acc-head');
-  head.addEventListener('click', () => {
-    const open = item.classList.toggle('open');
-    head.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
 });
 
 </script>
